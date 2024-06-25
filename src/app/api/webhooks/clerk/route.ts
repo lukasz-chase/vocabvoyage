@@ -6,7 +6,6 @@ import { userData } from "@/db/schema";
 import { eq } from "drizzle-orm";
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
-
   if (!WEBHOOK_SECRET) {
     throw new Error(
       "Please add CLERK_WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
@@ -48,29 +47,36 @@ export async function POST(req: Request) {
       status: 400,
     });
   }
-
   const eventType = evt.type;
 
-  if (eventType === "user.created") {
-    await db.insert(userData).values({
-      userId: payload.data.id,
-      userName: payload.data.username,
-      userImageSrc: payload.data.image_url,
-      activeCourseId: null,
-    });
-  }
-  if (eventType === "user.updated") {
-    await db
-      .update(userData)
-      .set({
-        userName: payload.data.username,
+  try {
+    if (eventType === "user.created") {
+      await db.insert(userData).values({
+        userId: payload.data.id,
+        userName:
+          payload.data.username ||
+          `${payload.data?.first_name || ""} ${payload.data?.last_name || ""}`,
         userImageSrc: payload.data.image_url,
-      })
-      .where(eq(userData.userId, payload.data.id));
-  }
+        activeCourseId: null,
+      });
+    }
+    if (eventType === "user.updated") {
+      await db
+        .update(userData)
+        .set({
+          userName: payload.data.username,
+          userImageSrc: payload.data.image_url,
+        })
+        .where(eq(userData.userId, payload.data.id));
+    }
 
-  if (eventType === "user.deleted") {
-    await db.delete(userData).where(eq(userData.userId, payload.data.id));
+    if (eventType === "user.deleted") {
+      await db.delete(userData).where(eq(userData.userId, payload.data.id));
+    }
+  } catch (error) {
+    return new Response("Error occured", {
+      status: 400,
+    });
   }
 
   return new Response("", { status: 200 });
