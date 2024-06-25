@@ -2,8 +2,12 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export default function Home() {
+  const { sessionId } = auth();
+  if (sessionId) redirect("/learn");
   return (
     <div className="bg-primary flex-col md:flex-row h-full w-full flex items-center justify-center gap-8 md:gap-32">
       <div>
