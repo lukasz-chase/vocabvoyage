@@ -20,13 +20,12 @@ export const List = ({ courses, activeCourseId }: Props) => {
     if (id === activeCourseId) {
       return router.push("/learn");
     }
-
     startTransition(() => {
       setActiveCourse(id).catch(() => toast.error("Something went wrong"));
     });
   };
   return (
-    <div className="grid pt-6 grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
+    <div className="grid pt-6 grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-2">
       {courses.map((course) => (
         <Card
           key={course.id}

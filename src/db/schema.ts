@@ -6,6 +6,7 @@ import {
   pgTable,
   serial,
   text,
+  timestamp,
 } from "drizzle-orm/pg-core";
 
 export const courses = pgTable("courses", {
@@ -144,6 +145,12 @@ export const userData = pgTable("user_data", {
   activeCourseId: integer("active_course_id").references(() => courses.id, {
     onDelete: "cascade",
   }),
+  subscriptionId: integer("subscription_id").references(
+    () => userSubscription.id,
+    {
+      onDelete: "cascade",
+    }
+  ),
 });
 
 export const userDataRelations = relations(userData, ({ one, many }) => ({
@@ -151,5 +158,28 @@ export const userDataRelations = relations(userData, ({ one, many }) => ({
     fields: [userData.activeCourseId],
     references: [courses.id],
   }),
+  userSubscription: one(userSubscription, {
+    fields: [userData.subscriptionId],
+    references: [userSubscription.id],
+  }),
   courseProgress: many(courseProgress),
 }));
+
+export const userSubscription = pgTable("user_subscription", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull().unique(),
+  stripeCustomerId: text("stripe_customer_id").notNull().unique(),
+  stripeSubscriptionId: text("stripe_subscription_id").notNull().unique(),
+  stripePriceId: text("stripe_price_id").notNull(),
+  stripeCurrentPeriodEnd: timestamp("stripe_current_period_end").notNull(),
+});
+
+export const userSubscriptionRelations = relations(
+  userSubscription,
+  ({ one }) => ({
+    user: one(userData, {
+      fields: [userSubscription.userId],
+      references: [userData.userId],
+    }),
+  })
+);

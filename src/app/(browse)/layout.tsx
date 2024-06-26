@@ -1,7 +1,7 @@
 import { MobileHeader } from "@/components/mobileHeader";
 import { Sidebar } from "@/components/sidebar";
 
-const BrowseLayout = ({ children }: { children: React.ReactNode }) => {
+const BrowseLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <MobileHeader />
