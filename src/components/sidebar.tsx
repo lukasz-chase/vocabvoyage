@@ -4,6 +4,34 @@ import { SidebarItem } from "./sidebarItem";
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
 
+const sidebarLinks = [
+  {
+    href: "/learn",
+    label: "Learn",
+    iconSrc: "/learn.svg",
+  },
+  {
+    href: "/flashcards",
+    label: "Flashcards",
+    iconSrc: "/flashcards.png",
+  },
+  {
+    href: "/leaderboard",
+    label: "Leaderboard",
+    iconSrc: "/leaderboard.svg",
+  },
+  {
+    href: "/quests",
+    label: "Quests",
+    iconSrc: "/quests.svg",
+  },
+  {
+    href: "/shop",
+    label: "Shop",
+    iconSrc: "/shop.svg",
+  },
+];
+
 type Props = {
   className?: string;
 };
@@ -24,14 +52,9 @@ export const Sidebar = ({ className }: Props) => {
         </div>
       </Link>
       <div className="flex flex-col gap-y-2 flex-1">
-        <SidebarItem iconSrc="/learn.svg" href="/learn" label="Learn" />
-        <SidebarItem
-          iconSrc="/leaderboard.svg"
-          href="/leaderboard"
-          label="Leaderboard"
-        />
-        <SidebarItem iconSrc="/quests.svg" href="/quests" label="Quests" />
-        <SidebarItem iconSrc="/shop.svg" href="/shop" label="Shop" />
+        {sidebarLinks.map((link) => (
+          <SidebarItem key={link.href} {...link} />
+        ))}
       </div>
       <div className="p-4">
         <ClerkLoading>

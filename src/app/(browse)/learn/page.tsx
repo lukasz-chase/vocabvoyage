@@ -10,7 +10,7 @@ import { getUserSubscription } from "@/db/queries/userSubscription";
 import { redirect } from "next/navigation";
 import React from "react";
 import { Unit } from "./unit";
-import { Header } from "./header";
+import { Header } from "../../../components/header";
 
 const Learn = async () => {
   const userData = await getUserData();
@@ -42,7 +42,7 @@ const Learn = async () => {
         <Quests points={courseProgress.points!} />
       </StickyWrapper>
       <FeedWrapper>
-        <Header title={userData.activeCourse.title} />
+        <Header title={userData.activeCourse.title} link="/courses" />
         {units.map((unit) => (
           <div key={unit.id} className="mb-10">
             <Unit

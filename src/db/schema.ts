@@ -1,7 +1,9 @@
+import { FLASHCARD_STATE } from "@/lib/constants";
 import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
+  json,
   pgEnum,
   pgTable,
   serial,
@@ -183,3 +185,50 @@ export const userSubscriptionRelations = relations(
     }),
   })
 );
+
+export const flashcardSets = pgTable("flashcard_sets", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  userId: text("user_id").notNull(),
+  flashcardsToLearn: json("flashcards_to_learn")
+    .notNull()
+    .default([])
+    .$type<number[]>(),
+});
+
+export const flashcardSetsRelations = relations(
+  flashcardSets,
+  ({ one, many }) => ({
+    user: one(userData, {
+      fields: [flashcardSets.userId],
+      references: [userData.userId],
+    }),
+    flashcards: many(flashcard),
+  })
+);
+
+export const flashcardStateType = pgEnum(
+  "state",
+  Object.values(FLASHCARD_STATE) as [string]
+);
+
+export const flashcard = pgTable("flashcard", {
+  id: serial("id").primaryKey(),
+  term: text("term").notNull(),
+  definition: text("definition").notNull(),
+  state: flashcardStateType("state")
+    .notNull()
+    .default(FLASHCARD_STATE.NOT_GUESSED),
+  flashcardSetId: integer("flashcard_set_id").references(
+    () => flashcardSets.id,
+    {
+      onDelete: "cascade",
+    }
+  ),
+});
+export const flashcardRelations = relations(flashcard, ({ one }) => ({
+  flashcardSet: one(flashcardSets, {
+    fields: [flashcard.flashcardSetId],
+    references: [flashcardSets.id],
+  }),
+}));

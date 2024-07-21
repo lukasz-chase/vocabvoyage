@@ -22,7 +22,6 @@ export const Quests = ({ points }: Props) => {
       <ul className="w-full space-y-4 ">
         {quests.map((quest) => {
           const progress = (points / quest.value) * 100;
-          console.log(progress);
           return (
             <div
               className="flex items-center w-full p-4 gap-x-3"

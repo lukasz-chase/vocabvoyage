@@ -8,14 +8,12 @@ import { Challenge } from "./challenge";
 import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/actions/challengeProgress";
 import { toast } from "sonner";
-import { useAudio, useWindowSize, useMount } from "react-use";
-import Image from "next/image";
-import { ResultCard } from "./resultCard";
-import { useRouter } from "next/navigation";
-import Confetti from "react-confetti";
+import { useAudio, useMount } from "react-use";
+
 import { useHeartsModal } from "@/store/useHeartsModal";
 import { usePracticeModal } from "@/store/usePracticeModal";
 import { reduceHearts } from "@/actions/courseProgress";
+import LessonCompleted from "./lessonCompleted";
 type Props = {
   initialPercentage: number;
   initialHearts: number;
@@ -41,13 +39,8 @@ export const Quiz = ({
   useMount(() => {
     if (initialPercentage === 100) openPracticeModal();
   });
-  const router = useRouter();
-  const { width, height } = useWindowSize();
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
-  const [finishAudio] = useAudio({
-    src: "/finish.mp3",
-    autoPlay: true,
-  });
+
   const [incorrectAudio, _i, incorrectControls] = useAudio({
     src: "/incorrect.wav",
   });
@@ -56,7 +49,6 @@ export const Quiz = ({
   const [percentage, setPercentage] = useState(() => {
     return initialPercentage === 100 ? 0 : initialPercentage;
   });
-  const [lessonId] = useState(initialLessonId);
   const [challenges] = useState(initialLessonChallenges);
   const [activeIndex, setActiveIndex] = useState(() => {
     const uncompletedIndex = challenges.findIndex(
@@ -74,45 +66,10 @@ export const Quiz = ({
   };
   if (!challenge)
     return (
-      <>
-        {finishAudio}
-        <Confetti
-          width={width}
-          height={height}
-          recycle={false}
-          numberOfPieces={500}
-          tweenDuration={10000}
-        />
-        <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
-          <Image
-            src="/finish.svg"
-            alt="Finish"
-            className="hidden lg:block"
-            height={100}
-            width={100}
-          />
-          <Image
-            src="/finish.svg"
-            alt="Finish"
-            className="block lg:hidden"
-            height={50}
-            width={50}
-          />
-          <h1 className="text-xl lg:text-3xl font-bold text-neutral-700">
-            Great job! <br />
-            Youve completed the lesson.
-          </h1>
-          <div className="flex items-center gap-x-4 w-full">
-            <ResultCard variant="points" value={challenges.length * 10} />
-            <ResultCard variant="hearts" value={challenges.length * 10} />
-          </div>
-        </div>
-        <Footer
-          lessonId={lessonId}
-          status="completed"
-          onCheck={() => router.push("/learn")}
-        />
-      </>
+      <LessonCompleted
+        challengesLength={challenges.length}
+        initialLessonId={initialLessonId}
+      />
     );
   const title =
     challenge.type === "ASSIST"

@@ -16,6 +16,8 @@ const main = async () => {
     await db.delete(schema.challenges);
     await db.delete(schema.challengeOptions);
     await db.delete(schema.challengeProgress);
+    await db.delete(schema.flashcardSets);
+    await db.delete(schema.flashcard);
 
     await db.insert(schema.courses).values([
       {
@@ -132,21 +134,18 @@ const main = async () => {
     await db.insert(schema.challengeOptions).values([
       {
         challengeId: 1,
-        imageSrc: "/man.svg",
         correct: true,
         text: "el hombre",
         audioSrc: "/es_man.mp3",
       },
       {
         challengeId: 1,
-        imageSrc: "/woman.svg",
         correct: false,
         text: "la mujer",
         audioSrc: "/es_woman.mp3",
       },
       {
         challengeId: 1,
-        imageSrc: "/robot.svg",
         correct: false,
         text: "el robot",
         audioSrc: "/es_robot.mp3",
@@ -194,6 +193,25 @@ const main = async () => {
         correct: true,
         text: "el robot",
         audioSrc: "/es_robot.mp3",
+      },
+    ]);
+    await db.insert(schema.flashcardSets).values({
+      id: 1,
+      title: "Spanish",
+      userId: "user_2iVHGmwIU5idqAmwvf9c4F9xtb5",
+    });
+    await db.insert(schema.flashcard).values([
+      {
+        id: 1,
+        term: "uso",
+        definition: "(I) am wearing, (I) am using",
+        flashcardSetId: 1,
+      },
+      {
+        id: 2,
+        term: "usas",
+        definition: "(?) do you use, (?) are you using",
+        flashcardSetId: 1,
       },
     ]);
     console.log("Seeding finished");

@@ -4,7 +4,7 @@ import { courses, userData } from "@/db/schema";
 import { Card } from "./card";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { setActiveCourse } from "@/actions/user-data";
+import { setActiveCourse } from "@/actions/userData";
 import { toast } from "sonner";
 
 type Props = {
