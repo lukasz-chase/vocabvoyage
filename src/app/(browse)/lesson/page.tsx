@@ -15,7 +15,7 @@ const LessonPage = async () => {
     userSubscriptionData,
   ]);
   if (!lesson || !userProgress) redirect("/learn");
-
+  console.log(lesson);
   const initialPercentage =
     (lesson.challenges.filter((challenge) => challenge.completed).length /
       lesson.challenges.length) *

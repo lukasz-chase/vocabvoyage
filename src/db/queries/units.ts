@@ -1,9 +1,21 @@
 import { cache } from "react";
 import db from "../drizzle";
-import { challengeProgress, courses } from "../schema";
+import { challengeProgress, courses, units } from "../schema";
 import { eq } from "drizzle-orm";
 import { auth } from "@clerk/nextjs";
 import { getUserData } from "./userData";
+
+export const getUnits = cache(async () => {
+  const data = await db.query.units.findMany();
+  return data;
+});
+
+export const getUnitById = cache(async (unitId: number) => {
+  const data = await db.query.units.findFirst({
+    where: eq(units.id, unitId),
+  });
+  return data;
+});
 
 export const getUnitsByCourseId = cache(async (courseId: number) => {
   const { userId } = auth();

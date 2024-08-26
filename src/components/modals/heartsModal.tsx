@@ -40,7 +40,7 @@ export const HeartsModal = () => {
           <DialogTitle className="text-center font-bold text-2xl">
             You ran out of hearts!
           </DialogTitle>
-          <DialogDescription className="text-center text-base">
+          <DialogDescription className="text-center text-gray">
             Get pro for unlimited herats, or purchase them in the store.
           </DialogDescription>
         </DialogHeader>

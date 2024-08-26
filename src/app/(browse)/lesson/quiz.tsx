@@ -37,6 +37,7 @@ export const Quiz = ({
   const { open: openHeartsModal } = useHeartsModal();
   const { open: openPracticeModal } = usePracticeModal();
   useMount(() => {
+    console.log(initialPercentage);
     if (initialPercentage === 100) openPracticeModal();
   });
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });

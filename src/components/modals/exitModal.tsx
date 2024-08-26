@@ -36,7 +36,7 @@ export const ExitModal = () => {
           <DialogTitle className="text-center font-bold text-2xl">
             Wait, dont go!
           </DialogTitle>
-          <DialogDescription className="text-center text-base">
+          <DialogDescription className="text-center text-gray">
             Youre about to leave the lesson. Are you sure?
           </DialogDescription>
         </DialogHeader>

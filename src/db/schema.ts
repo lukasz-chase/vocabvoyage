@@ -1,4 +1,5 @@
 import { FLASHCARD_STATE } from "@/lib/constants";
+import { challengeTypesArray } from "@/types";
 import { relations } from "drizzle-orm";
 import {
   boolean,
@@ -57,7 +58,7 @@ export const lessonsRelations = relations(lessons, ({ one, many }) => ({
   challenges: many(challenges),
 }));
 
-export const challengesEnum = pgEnum("type", ["SELECT", "ASSIST"]);
+export const challengesEnum = pgEnum("type", challengeTypesArray);
 
 export const challenges = pgTable("challenges", {
   id: serial("id").primaryKey(),

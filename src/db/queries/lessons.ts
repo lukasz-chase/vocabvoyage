@@ -8,6 +8,11 @@ import db from "../drizzle";
 import { challengeProgress, lessons } from "../schema";
 import { eq } from "drizzle-orm";
 
+export const getLessons = cache(async () => {
+  const data = await db.query.lessons.findMany();
+  return data;
+});
+
 export const getLesson = cache(async (id?: number) => {
   const { userId } = auth();
 
@@ -18,7 +23,7 @@ export const getLesson = cache(async (id?: number) => {
   const courseProgress = await getCurrentUserCourseProgress();
   if (!courseProgress) return null;
 
-  const lessonId = id || courseProgress?.courseId;
+  const lessonId = id || courseProgress?.activeLessonId;
 
   if (!lessonId) {
     return null;

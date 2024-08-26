@@ -46,8 +46,6 @@ const Learn = async () => {
         {units.map((unit) => (
           <div key={unit.id} className="mb-10">
             <Unit
-              id={unit.id}
-              order={unit.order}
               description={unit.description}
               lessons={unit.lessons}
               title={unit.title}
