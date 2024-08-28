@@ -20,8 +20,12 @@ export const List = ({ courses, activeCourseId }: Props) => {
     if (id === activeCourseId) {
       return router.push("/learn");
     }
-    startTransition(() => {
-      setActiveCourse(id).catch(() => toast.error("Something went wrong"));
+    startTransition(async () => {
+      try {
+        await setActiveCourse(id);
+      } catch (error: any) {
+        toast.error(error.message || "Something went wrong");
+      }
     });
   };
   return (

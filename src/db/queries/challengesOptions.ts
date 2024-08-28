@@ -4,12 +4,12 @@ import db from "../drizzle";
 import { challenges } from "../schema";
 import { eq } from "drizzle-orm";
 
-export const getChallenges = cache(async () => {
-  const data = await db.query.challenges.findMany();
+export const getChallengeOptions = cache(async () => {
+  const data = await db.query.challengeOptions.findMany();
   return data;
 });
 
-export const getChallengeById = cache(async (challengeId: number) => {
+export const getChallengeOptionsById = cache(async (challengeId: number) => {
   const { userId } = auth();
   if (!userId) return null;
   const data = await db.query.flashcard.findFirst({

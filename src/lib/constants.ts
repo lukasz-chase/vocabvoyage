@@ -24,14 +24,21 @@ export const AdminFieldStructure = {
     { name: "order", label: "order", placeholder: "order" },
   ],
   lessons: [
-    { name: "title", label: "Title", placeholder: "Title" },
-    { name: "unitId", label: "Description", placeholder: "Description" },
+    { name: "Title", label: "Title", placeholder: "Title" },
+    { name: "unitId", label: "unitId", placeholder: "unitId" },
     { name: "order", label: "order", placeholder: "order" },
   ],
   challenges: [
-    { name: "lessonId", label: "Title", placeholder: "Title" },
-    { name: "type", label: "Description", placeholder: "Description" },
-    { name: "question", label: "order", placeholder: "order" },
+    { name: "lessonId", label: "lessonId", placeholder: "lessonId" },
+    { name: "type", label: "type", placeholder: "type" },
+    { name: "question", label: "question", placeholder: "question" },
     { name: "order", label: "order", placeholder: "order" },
+  ],
+  challengeOptions: [
+    { name: "challengeId", label: "challengeId", placeholder: "challengeId" },
+    { name: "text", label: "text", placeholder: "text" },
+    { name: "correct", label: "correct", placeholder: "correct" },
+    { name: "imageSrc", label: "imageSrc", placeholder: "imageSrc" },
+    { name: "audioSrc", label: "audioSrc", placeholder: "audioSrc" },
   ],
 };

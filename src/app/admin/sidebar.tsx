@@ -1,34 +1,37 @@
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import SidebarLink from "./sidebarLink";
 
 const links = [
   {
-    name: "Courses",
+    label: "Courses",
     href: "/admin/courses",
   },
   {
-    name: "Units",
+    label: "Units",
     href: "/admin/units",
   },
   {
-    name: "Lessons",
+    label: "Lessons",
     href: "/admin/lessons",
   },
   {
-    name: "Challenges",
+    label: "Challenges",
     href: "/admin/challenges",
+  },
+  {
+    label: "Challenge Options",
+    href: "/admin/challengesOptions",
   },
 ];
 
 const AdminSidebar = () => {
   return (
-    <div className="bg-primary h-full">
-      <h1>Dashboard</h1>
-      <div className="flex flex-col items-center gap-4 p-4">
+    <div className="bg-primary h-full text-center p-4">
+      <div className="flex flex-col items-center gap-4 ">
         {links.map((link) => (
-          <Link key={link.name} href={link.href} className="px-4 text-white">
-            {link.name}
-          </Link>
+          <SidebarLink key={link.label} {...link} />
         ))}
       </div>
     </div>

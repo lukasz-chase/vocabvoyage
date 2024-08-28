@@ -1,18 +1,18 @@
 import React from "react";
-import { courses } from "@/db/schema";
+import { challenges } from "@/db/schema";
 import AdminTable from "../AdminTable";
-import { getCourses } from "@/db/queries/courses";
-import { deleteCourse } from "@/actions/course";
+import { deleteChallenge } from "@/actions/challenge";
+import { getChallenges } from "@/db/queries/challenges";
 
 const Challenges = async () => {
-  const coursesData = await getCourses();
+  const challengesData = await getChallenges();
 
   return (
     <AdminTable
-      data={coursesData}
-      dataName="courses"
-      schema={courses}
-      deleteFunction={deleteCourse}
+      data={challengesData}
+      dataName="challenges"
+      schema={challenges}
+      deleteFunction={deleteChallenge}
     />
   );
 };

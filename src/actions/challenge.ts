@@ -37,7 +37,7 @@ export const createChallenge = async (challengeData: {
   } catch (error) {
     console.log(error);
   }
-  revalidatePath(`/admin/courses`);
+  revalidatePath(`/admin/challenges`);
 };
 
 export const deleteChallenge = async (challengeId: number) => {

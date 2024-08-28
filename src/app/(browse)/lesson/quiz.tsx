@@ -37,7 +37,6 @@ export const Quiz = ({
   const { open: openHeartsModal } = useHeartsModal();
   const { open: openPracticeModal } = usePracticeModal();
   useMount(() => {
-    console.log(initialPercentage);
     if (initialPercentage === 100) openPracticeModal();
   });
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
@@ -60,6 +59,7 @@ export const Quiz = ({
   const [selectedOption, setSelectedOption] = useState<number>();
   const challenge = challenges[activeIndex];
   const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
+  console.log(challenge);
   const options = challenge?.challengeOptions ?? [];
   const onSelect = (id: number) => {
     if (status !== "none") return;

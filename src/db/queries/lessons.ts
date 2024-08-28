@@ -43,7 +43,6 @@ export const getLesson = cache(async (id?: number) => {
       },
     },
   });
-
   if (!data || !data.challenges) {
     return null;
   }
