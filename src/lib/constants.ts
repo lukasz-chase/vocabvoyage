@@ -1,3 +1,5 @@
+import { challengeTypesArray } from "@/types";
+
 export const POINTS_TO_REFILL = 50;
 export const MAX_HEARTS = 5;
 export const quests = [
@@ -12,33 +14,130 @@ export enum FLASHCARD_STATE {
   GUESSED_INCORRECTLY = "GUESSED_INCORRECTLY",
 }
 
+export enum FieldTypes {
+  INPUT = "INPUT",
+  SELECT = "SELECT",
+  CHECKBOX = "CHECKBOX",
+}
+
 export const AdminFieldStructure = {
   courses: [
-    { name: "title", label: "Title", placeholder: "Title" },
-    { name: "imageSrc", label: "Image Src", placeholder: "Image Src" },
+    {
+      name: "title",
+      label: "Title",
+      placeholder: "Title",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "imageSrc",
+      label: "Image Src",
+      placeholder: "Image Src",
+      type: FieldTypes.INPUT,
+    },
   ],
   units: [
-    { name: "title", label: "Title", placeholder: "Title" },
-    { name: "description", label: "Description", placeholder: "Description" },
-    { name: "courseId", label: "courseId", placeholder: "courseId" },
-    { name: "order", label: "order", placeholder: "order" },
+    {
+      name: "title",
+      label: "Title",
+      placeholder: "Title",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "description",
+      label: "Description",
+      placeholder: "Description",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "courseId",
+      label: "courseId",
+      placeholder: "courseId",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "order",
+      label: "order",
+      placeholder: "order",
+      type: FieldTypes.INPUT,
+    },
   ],
   lessons: [
-    { name: "Title", label: "Title", placeholder: "Title" },
-    { name: "unitId", label: "unitId", placeholder: "unitId" },
-    { name: "order", label: "order", placeholder: "order" },
+    {
+      name: "Title",
+      label: "Title",
+      placeholder: "Title",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "unitId",
+      label: "unitId",
+      placeholder: "unitId",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "order",
+      label: "order",
+      placeholder: "order",
+      type: FieldTypes.INPUT,
+    },
   ],
   challenges: [
-    { name: "lessonId", label: "lessonId", placeholder: "lessonId" },
-    { name: "type", label: "type", placeholder: "type" },
-    { name: "question", label: "question", placeholder: "question" },
-    { name: "order", label: "order", placeholder: "order" },
+    {
+      name: "lessonId",
+      label: "lessonId",
+      placeholder: "lessonId",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "type",
+      label: "type",
+      placeholder: "type",
+      type: FieldTypes.SELECT,
+      selectOptions: challengeTypesArray,
+    },
+    {
+      name: "question",
+      label: "question",
+      placeholder: "question",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "order",
+      label: "order",
+      placeholder: "order",
+      type: FieldTypes.INPUT,
+    },
   ],
   challengeOptions: [
-    { name: "challengeId", label: "challengeId", placeholder: "challengeId" },
-    { name: "text", label: "text", placeholder: "text" },
-    { name: "correct", label: "correct", placeholder: "correct" },
-    { name: "imageSrc", label: "imageSrc", placeholder: "imageSrc" },
-    { name: "audioSrc", label: "audioSrc", placeholder: "audioSrc" },
+    {
+      name: "challengeId",
+      label: "challengeId",
+      placeholder: "challengeId",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "text",
+      label: "text",
+      placeholder: "text",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "correct",
+      label: "correct",
+      placeholder: "correct",
+      type: FieldTypes.CHECKBOX,
+    },
+    {
+      name: "imageSrc",
+      label: "imageSrc",
+      placeholder: "imageSrc",
+      type: FieldTypes.INPUT,
+    },
+    {
+      name: "audioSrc",
+      label: "audioSrc",
+      placeholder: "audioSrc",
+      type: FieldTypes.INPUT,
+    },
   ],
 };

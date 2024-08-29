@@ -14,6 +14,8 @@ import { useHeartsModal } from "@/store/useHeartsModal";
 import { usePracticeModal } from "@/store/usePracticeModal";
 import { reduceHearts } from "@/actions/courseProgress";
 import LessonCompleted from "./lessonCompleted";
+import { challengeTypesEnum } from "@/types";
+import WordsQuiz from "./wordsQuiz";
 type Props = {
   initialPercentage: number;
   initialHearts: number;
@@ -151,17 +153,24 @@ export const Quiz = ({
               {title}
             </h1>
             <div>
-              {challenge.type === "ASSIST" && (
-                <QuestionBubble question={challenge.question} />
+              {challenge.type !== challengeTypesEnum.WORDS_MASH && (
+                <>
+                  {challenge.type === "ASSIST" && (
+                    <QuestionBubble question={challenge.question} />
+                  )}
+                  <Challenge
+                    options={options}
+                    onSelect={onSelect}
+                    status={status}
+                    selectedOption={selectedOption}
+                    disabled={pending}
+                    type={challenge.type}
+                  />
+                </>
               )}
-              <Challenge
-                options={options}
-                onSelect={onSelect}
-                status={status}
-                selectedOption={selectedOption}
-                disabled={pending}
-                type={challenge.type}
-              />
+              {challenge.type === challengeTypesEnum.WORDS_MASH && (
+                <WordsQuiz />
+              )}
             </div>
           </div>
         </div>

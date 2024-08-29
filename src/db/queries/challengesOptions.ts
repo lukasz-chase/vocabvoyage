@@ -12,7 +12,7 @@ export const getChallengeOptions = cache(async () => {
 export const getChallengeOptionsById = cache(async (challengeId: number) => {
   const { userId } = auth();
   if (!userId) return null;
-  const data = await db.query.flashcard.findFirst({
+  const data = await db.query.challengeOptions.findFirst({
     where: eq(challenges.id, challengeId),
   });
   return data;

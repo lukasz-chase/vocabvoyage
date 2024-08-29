@@ -15,7 +15,6 @@ const LessonPage = async () => {
     userSubscriptionData,
   ]);
   if (!lesson || !userProgress) redirect("/learn");
-  console.log(lesson);
   const initialPercentage =
     (lesson.challenges.filter((challenge) => challenge.completed).length /
       lesson.challenges.length) *
@@ -24,7 +23,7 @@ const LessonPage = async () => {
     <Quiz
       initialLessonId={lesson.id}
       initialLessonChallenges={lesson.challenges}
-      initialHearts={userProgress.hearts}
+      initialHearts={userProgress.hearts!}
       userSubscription={userSubscription}
       initialPercentage={initialPercentage}
     />

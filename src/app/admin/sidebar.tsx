@@ -22,7 +22,7 @@ const links = [
   },
   {
     label: "Challenge Options",
-    href: "/admin/challengesOptions",
+    href: "/admin/challengeOptions",
   },
 ];
 

@@ -26,7 +26,7 @@ const AdminTableRow = ({ data, deleteFunction, dataName }: Props) => {
     <tr className="border-b border-gray-200 hover:bg-gray-50">
       {Object.values(data).map((v: any, i: number) => (
         <td className="py-2 px-4 text-center" key={`${v} - ${i}`}>
-          {v}
+          {typeof v === "boolean" ? v.toString() : v}
         </td>
       ))}
       <td className="py-2 px-4 flex gap-2 items-center justify-center">

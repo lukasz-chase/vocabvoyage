@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import { challenges } from "@/db/schema";
-import { ChallengeType } from "@/types";
+import { challengeTypesEnum } from "@/types";
 import { auth } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
@@ -14,6 +14,8 @@ export const updateChallenge = async (
   if (!userId) {
     throw new Error("Unauthorized");
   }
+  console.log(challenge);
+
   await db
     .update(challenges)
     .set(challenge)
@@ -23,7 +25,7 @@ export const updateChallenge = async (
 };
 
 export const createChallenge = async (challengeData: {
-  type: ChallengeType;
+  type: challengeTypesEnum;
   question: string;
   lessonId: number;
   order: number;
